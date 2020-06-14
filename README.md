@@ -10,7 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 The tsc scanner should run on any UNIX/Linux or Win32 box. You only need a relatively modern gcc compiler. To compile for another architecture (eg Solaris SPARC) you will need a cross compiler. 
-There are two versions: single or with threads.
+There are two versions: non block or threads.
 
 ### Installing
 
