@@ -1,4 +1,4 @@
-# tsc
+# tsc (Simple TCP Scanner)
 Simple dependency free tcp scan tool for UNIX/Linux and MS Windows
 
 ## Getting Started
