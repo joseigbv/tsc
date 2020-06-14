@@ -1,4 +1,4 @@
-# tsc (Simple TCP Scanner)
+# tsc (TCP Simple Scanner)
 Simple dependency free tcp scan tool for UNIX/Linux and MS Windows
 
 ## Getting Started
@@ -127,27 +127,27 @@ $ awk -F';' '{ x[$2]++ } END { for(k in x) print x[k], k; }' < ips-rompager-coun
 49 GB, United Kingdom
 ```
 
-With the SAVE_GET option: 
+##### SAVE_GET
+
+With SAVE_GET option, tsc save the HTTP GET response when port is open:
 
 ```
 $ gcc tsc.c -o tsc -lpthread -DSAVE_GET
 ```
 
-It also creates a hierarchical directory structure with the output of execution:
+tsc creates a hierarchical directory structure with the output of execution:
 
 ```
 http://192.168.0.1/index.html -> ./out/192/168/0/1:80. 
 ```
 
-##### Explotacion extructura "out/" 
-
-We can also use the directory structure to search by content in the html pages, for example, "mycorp" appears on the server home page:
+We can use the directory structure to search by content in the html pages, for example, "mycorp" appears on the server home page:
 
 ```
 $ grep -r -i mycorp --colour -H -m 1 out
 
 ...
-out/213/0/43/68:80: <li><a href="http://www.mycorp.com/on/io/navegacion/on.html?servicio=entrada&entrada=aviso_legal_home" TARGET="_BLANK">Aviso legal</a></li>
+out/223/0/43/68:80: <li><a href="http://www.mycorp.com/on/io/navegacion/on.html?servicio=entrada&entrada=aviso_legal_home" TARGET="_BLANK">Aviso legal</a></li>
 out/223/197/87/54:80: <meta name="keywords" content="mycorp, clients"/>
 out/223/14/216/32:80: <meta http-equiv="refresh" content="0;URL=http://m2m.mycorp.com/psc">
 ...
@@ -189,6 +189,80 @@ $ awk -F';' '{ x[$2]++ } END { for(k in x) print x[k], k; }' < ips-zte-country.t
 85499 CO, Colombia
 748 AR, Argentina
 10 CL, Chile
+```
+
+##### SSH_AUTH 
+
+# With SSH_AUTH option, tsc will try weak credentials (root/root) for SSH services:
+
+```
+$ gcc -DSSH-AUTH ...
+$ ./tsc ips-all.txt 22 | tee ips-all-ssh.txt
+
+...
+209.181.119.180:22      open    1222 ms
+277.103.239.192:22      open    2406 ms SSH-2.0-dropbear_0.51         AUTH! (root:root)
+279.137.211.133:22      open    2360 ms SSH-2.0-dropbear_0.51         AUTH! (root:root)
+277.113.158.207:22      open    1281 ms SSH-2.0-dropbear_0.50
+...
+```
+
+Top 10 banners: 
+
+```
+$ awk '{ x[$5]++ } END { for (k in x) print x[k], k }' < ips-all-ssh.txt | sort -nr | head -10
+
+30936 SSH-2.0-dropbear_0.46..
+15395 SSH-2.0-dropbear_0.51..
+4029 SSH-2.0-ROSSSH..
+3343 SSH-1.99-Cisco-1.25.
+2752 SSH-2.0-Trendchip_0.1..
+2356 SSH-2.0-OpenSSH_5.5p1
+2346 SSH-2.0-OpenSSH_6.0p1
+2191 SSH-2.0-OpenSSH_5.9p1
+...
+```
+
+Looking for 'dropbear' servers:
+
+```
+$ grep -i dropbear ips-all-ssh.txt \
+   | cut -d: -f1 \
+   | xargs -I% sh -c 'echo -n %";"; geoiplookup %' \
+   | sed -n 's/GeoIP Country Edition: //p' \
+   > ips-dropbear-country.txt
+   
+$ awk -F';' '{ x[$2]++ } END { for(k in x) print x[k], k; }' < ips-dropbear-country.txt | sort -nr
+
+27469 ES, Spain
+6235 CO, Colombia
+4590 PE, Peru
+3219 AR, Argentina
+2939 BR, Brazil
+2932 CL, Chile
+1683 CZ, Czech Republic
+736 DE, Germany
+70 EC, Ecuador
+43 GB, United Kingdom
+# ...
+```
+
+Country distribution of routers with open SSH and default credentials:
+
+```
+$ grep AUTH ips-all-ssh.txt \
+   | cut -d: -f1 \
+   |  xargs -I% sh -c 'echo -n %";"; geoiplookup %' \
+   | sed -n 's/GeoIP Country Edition: //p'
+   > tee ips-ssh-root-default-country.txt
+
+$ awk -F';' '{ x[$2]++ } END { for(k in x) print x[k], k; }' < ips-ssh-root-default-country.txt | sort -nr 
+
+2358 PE, Peru
+2196 CO, Colombia
+531 AR, Argentina
+368 BR, Brazil
+...
 ```
 
 ## Authors
