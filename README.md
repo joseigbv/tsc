@@ -193,7 +193,7 @@ $ awk -F';' '{ x[$2]++ } END { for(k in x) print x[k], k; }' < ips-zte-country.t
 
 ##### SSH_AUTH 
 
-# With SSH_AUTH option, tsc will try weak credentials (root/root) for SSH services:
+With SSH_AUTH option, tsc will try weak credentials (root/root) for SSH services:
 
 ```
 $ gcc -DSSH-AUTH ...
