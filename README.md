@@ -1,6 +1,8 @@
 # tsc (TCP Simple Scanner)
 Simple dependency free tcp scan tool for UNIX/Linux and MS Windows. Very useful in pentesting when you have a pivot machine and you cannot install anything. You simply copy the binary and start scanning.
 
+tsc is simple enough to extend it with the functionalities you need. For example, detection of SSH services with default credentials, banner extraction or http crawling.
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
