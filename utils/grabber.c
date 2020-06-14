@@ -8,12 +8,12 @@
 *	- http(s), puede salvar la respuesta en ficheros
 *	- ssh, prueba credenciales por defecto (root:root)
 *
-* linux: gcc tcp_scan.c -o tcp_scan -lpthread
-* osx: gcc tcp_scan.c -o tcp_scan
-* win32: gcc tcp_scan.c -o tcp_scan -lwsock32
-* solaris: gcc tcp_scan.c -o tcp_scan -lsocket -lnsl
+* linux: gcc tsc.c -o tsc -lpthread
+* osx: gcc tsc.c -o tsc  
+* win32: gcc tsc.c -o tsc -lwsock32
+* solaris: gcc tsc.c -o tsc -lsocket -lnsl
 * 
-* todas las opciones: gcc tcp_scan.c -Wall -o tcp_scan \
+* todas las opciones: gcc tsc.c -Wall -o tsc \
 *			-I/opt/libssh2-1.4.3/include \
 *			-L/opt/libssh2-1.4.3/lib \
 *			-lssh2 -lpthread -lcurl \

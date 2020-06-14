@@ -2,10 +2,10 @@
 /***************************************************************
 * simple tcp port scan (threads)
 *
-* linux: gcc tcp_scan.c -o tcp_scan -lpthread
-* osx: gcc tcp_scan.c -o tcp_scan
-* win32: gcc tcp_scan.c -o tcp_scan -lwsock32
-* solaris: gcc tcp_scan.c -o tcp_scan -lsocket -lnsl
+* linux: gcc tsc.c -o tsc -lpthread
+* osx: gcc tsc.c -o tsc
+* win32: gcc tsc.c -o tsc -lwsock32
+* solaris: gcc tsc.c -o tsc -lsocket -lnsl
 * 
 ****************************************************************/
 
