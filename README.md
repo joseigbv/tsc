@@ -17,7 +17,7 @@ There are two versions: non block or threads.
 Download a copy of the project from github: 
 
 ```
-$ git clone https://github.com/joseigbv/tsc
+$ git clone https://github.com/joseigbv/tsc.git
 ```
 
 Edit 'tsc.c' and change configuration (optional).
