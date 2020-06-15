@@ -267,6 +267,44 @@ $ awk -F';' '{ x[$2]++ } END { for(k in x) print x[k], k; }' < ips-ssh-root-defa
 ...
 ```
 
+### Prepare GeoIP:
+
+Install geoip
+
+```
+apt-get install geoip-bin
+```
+
+Update db
+
+```
+cd /usr/share/GeoIP/
+
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz 
+wget http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
+wget http://download.maxmind.com/download/geoip/database/asnum/GeoIPASNum.dat.gz
+wget http://download.maxmind.com/download/geoip/database/asnum/GeoIPASNumv6.dat.gz
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz 
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz 
+
+rm GeoIP.dat.old GeoIPv6.dat.old 
+
+gunzip GeoIP.dat.gz  
+gunzip GeoIPv6.dat.gz  
+gunzip GeoIPASNum.dat.gz 
+gunzip GeoIPASNumv6.dat.gz 
+gunzip GeoLiteCityv6.dat.gz 
+gunzip GeoLiteCity.dat.gz 
+
+wget http://geolite.maxmind.com/download/geoip/database/GeoIPCountryCSV.zip
+wget http://download.maxmind.com/download/geoip/database/asnum/GeoIPASNum2.zip 
+wget http://download.maxmind.com/download/geoip/database/asnum/GeoIPASNum2v6.zip
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.csv.gz
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity_CSV/GeoLiteCity-latest.zip
+wget http://geolite.maxmind.com/download/geoip/database/GeoIPv6.csv.gz
+
+```
+
 ## Authors
 
 * **José Ignacio Bravo** - *Initial work* - nacho.bravo@gmail.com
