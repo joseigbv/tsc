@@ -267,7 +267,7 @@ $ awk -F';' '{ x[$2]++ } END { for(k in x) print x[k], k; }' < ips-ssh-root-defa
 ...
 ```
 
-### Prepare GeoIP:
+## GeoIP:
 
 Install geoip
 
